@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f4">
+  <title>Home School Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard" aria-label="Home School Manager, accueil">
+        <img class="brand-logo" src="home-school-logo.svg" width="60" height="28" alt="">
+        <span class="brand-copy"><strong>HomeSchool</strong><small>Espace d'apprentissage</small></span>
+      </a>
+      <div class="side-label">ESPACE DE TRAVAIL</div>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <button class="nav-link active" data-view="dashboard"><span class="nav-icon">◫</span>Vue d'ensemble</button>
+        <button class="nav-link" data-view="activities"><span class="nav-icon">☷</span>Activités <span class="nav-count" id="nav-task-count">0</span></button>
+        <button class="nav-link" data-view="calendar"><span class="nav-icon">▦</span>Calendrier</button>
+        <button class="nav-link" data-view="notifications"><span class="nav-icon">♧</span>Notifications <span class="nav-dot" id="nav-unread-dot" hidden></span></button>
+      </nav>
+      <div class="sidebar-divider"></div>
+      <div class="side-label">VOTRE JOURNÉE</div>
+      <div class="sidebar-date" id="sidebar-date"></div>
+      <div class="day-progress"><span id="sidebar-progress"></span></div>
+      <p class="sidebar-progress-copy" id="sidebar-progress-copy"></p>
+      <div class="sidebar-bottom">
+        <div class="local-note"><span class="local-note-icon">⌁</span><span><strong>Vos données restent ici</strong><small>Sauvegarde automatique sur cet appareil.</small></span></div>
+        <button class="profile-button" type="button" aria-label="Profil parent"><span class="avatar">P</span><span><strong>Espace parent</strong><small>Administrateur</small></span><span class="profile-more">···</span></button>
+      </div>
+    </aside>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menu-toggle" aria-label="Ouvrir le menu">☰</button>
+        <div class="breadcrumb"><span>Accueil</span><span class="breadcrumb-slash">/</span><strong id="breadcrumb-current">Vue d'ensemble</strong></div>
+        <div class="topbar-actions">
+          <div class="today-chip"><span class="today-dot"></span><span id="topbar-date"></span></div>
+          <button class="icon-button notification-button" data-view="notifications" aria-label="Notifications">♧<span class="notification-pip" id="top-notification-pip" hidden></span></button>
+          <button class="button button-primary top-add" data-open-task><span>＋</span> Nouvelle activité</button>
+        </div>
+      </header>
+      <div class="page-content">
+        <section class="view active" id="view-dashboard">
+          <div class="welcome-row"><div><p class="eyebrow" id="welcome-date"></p><h1>Une belle journée pour <span>apprendre.</span></h1><p class="welcome-subtitle">Voici le programme et les progrès de votre maison aujourd'hui.</p></div><button class="button button-secondary print-button" id="print-day">▧ <span>Imprimer la journée</span></button></div>
+          <div class="stats-grid" id="stats-grid">
+            <article class="stat-card stat-blue"><div class="stat-top"><span>Activités du jour</span><span class="stat-icon">▦</span></div><div class="stat-value" id="stat-total">0</div><div class="stat-foot"><span class="stat-marker"></span>Au programme aujourd'hui</div></article>
+            <article class="stat-card stat-green"><div class="stat-top"><span>Réalisées</span><span class="stat-icon">✓</span></div><div class="stat-value" id="stat-done">0</div><div class="stat-foot"><span class="stat-marker"></span>Bravo pour ces progrès</div></article>
+            <article class="stat-card stat-orange"><div class="stat-top"><span>En cours</span><span class="stat-icon">◷</span></div><div class="stat-value" id="stat-doing">0</div><div class="stat-foot"><span class="stat-marker"></span>En plein apprentissage</div></article>
+            <article class="stat-card stat-red"><div class="stat-top"><span>En retard</span><span class="stat-icon">!</span></div><div class="stat-value" id="stat-late">0</div><div class="stat-foot"><span class="stat-marker"></span>À reprogrammer ou terminer</div></article>
+          </div>
+          <div class="dashboard-grid">
+            <section class="panel schedule-panel"><div class="panel-heading"><div><p class="panel-kicker">LE PROGRAMME</p><h2>Activités du jour</h2></div><button class="text-button" data-view="activities">Tout voir <span>→</span></button></div><div class="schedule-date"><span class="calendar-mini">▦</span><strong id="schedule-date-label"></strong><span class="schedule-date-note" id="schedule-day-count"></span></div><div class="activity-list" id="today-activity-list"></div><div class="empty-state" id="today-empty" hidden><span class="empty-icon">✳</span><strong>Votre journée est encore libre</strong><p>Ajoutez une activité pour préparer la suite.</p><button class="text-button" data-open-task>＋ Ajouter une activité</button></div></section>
+            <div class="dashboard-side">
+              <section class="panel completion-panel"><div class="panel-heading"><div><p class="panel-kicker">VOTRE RYTHME</p><h2>Progression du jour</h2></div><span class="progress-ring-icon">↗</span></div><div class="completion-body"><div class="progress-ring" id="completion-ring"><div><strong id="completion-rate">0%</strong><small>complété</small></div></div><div class="completion-details"><strong id="completion-count">0 sur 0 activité</strong><span class="completion-caption">Chaque petit pas compte.</span></div></div><div class="legend-row"><span><i class="legend-dot dot-complete"></i>Réalisées</span><span><i class="legend-dot dot-pending"></i>À venir</span></div></section>
+              <section class="panel reminder-panel"><div class="reminder-head"><span class="reminder-icon">✧</span><div><p class="panel-kicker">À NE PAS OUBLIER</p><h2>Prochaine échéance</h2></div></div><div id="next-deadline" class="next-deadline"></div></section>
+            </div>
+          </div>
+          <section class="panel week-strip-panel"><div class="panel-heading"><div><p class="panel-kicker">À VENIR</p><h2>Cette semaine</h2></div><button class="text-button" data-view="calendar">Voir le calendrier <span>→</span></button></div><div class="week-strip" id="week-strip"></div></section>
+        </section>
+        <section class="view" id="view-activities">
+          <div class="page-heading"><div><p class="eyebrow">ORGANISATION QUOTIDIENNE</p><h1>Vos activités</h1><p class="welcome-subtitle">Planifiez, suivez et célébrez chaque étape.</p></div><button class="button button-primary" data-open-task><span>＋</span> Ajouter une activité</button></div>
+          <section class="panel filters-panel"><div class="search-wrap"><span>⌕</span><input id="search-input" type="search" placeholder="Rechercher une activité..." aria-label="Rechercher une activité"></div><select id="filter-subject" aria-label="Filtrer par matière"><option value="">Toutes les matières</option></select><select id="filter-status" aria-label="Filtrer par statut"><option value="">Tous les statuts</option><option value="todo">À faire</option><option value="doing">En cours</option><option value="done">Réalisée</option><option value="late">En retard</option></select><select id="filter-priority" aria-label="Filtrer par priorité"><option value="">Toutes les priorités</option><option value="high">Élevée</option><option value="medium">Moyenne</option><option value="low">Faible</option></select><input id="filter-date" type="date" aria-label="Filtrer par date"><button class="icon-button filter-reset" id="reset-filters" aria-label="Effacer les filtres" title="Effacer les filtres">↺</button></section>
+          <section class="panel table-panel"><div class="table-toolbar"><div class="segmented" role="tablist" aria-label="Filtrer les activités"><button class="segment active" data-activity-tab="all">Toutes <span id="count-all">0</span></button><button class="segment" data-activity-tab="todo">À faire <span id="count-todo">0</span></button><button class="segment" data-activity-tab="doing">En cours <span id="count-doing">0</span></button><button class="segment" data-activity-tab="done">Réalisées <span id="count-done">0</span></button><button class="segment" data-activity-tab="late">En retard <span id="count-late">0</span></button></div><div class="table-actions"><button class="button button-quiet" id="export-csv">↓ <span>Exporter CSV</span></button><button class="button button-quiet" id="reset-data">↺ <span>Réinitialiser</span></button></div></div><div class="table-scroll"><table><thead><tr><th>ACTIVITÉ</th><th>DATE &amp; HORAIRE</th><th>PRIORITÉ</th><th>STATUT</th><th></th></tr></thead><tbody id="activity-table-body"></tbody></table></div><div class="table-empty" id="table-empty" hidden><span>⌕</span><strong>Aucune activité trouvée</strong><p>Essayez d'ajuster vos filtres ou créez une activité.</p></div></section>
+          <section class="panel history-panel"><div class="panel-heading"><div><p class="panel-kicker">VOS PROGRÈS</p><h2>Activités réalisées récemment</h2></div><span class="history-total" id="history-total">0 terminée</span></div><div id="history-list" class="history-list"></div></section>
+        </section>
+        <section class="view" id="view-calendar">
+          <div class="page-heading"><div><p class="eyebrow">VUE D'ENSEMBLE</p><h1>Calendrier</h1><p class="welcome-subtitle">Votre programme, jour après jour.</p></div><button class="button button-primary" data-open-task><span>＋</span> Ajouter une activité</button></div>
+          <section class="panel calendar-panel"><div class="calendar-toolbar"><div><p class="panel-kicker">PLANNING HEBDOMADAIRE</p><h2 id="calendar-month-label"></h2></div><div class="calendar-controls"><button class="icon-button" id="calendar-prev" aria-label="Semaine précédente">←</button><button class="button button-quiet" id="calendar-today">Aujourd'hui</button><button class="icon-button" id="calendar-next" aria-label="Semaine suivante">→</button></div></div><div class="calendar-grid" id="calendar-grid"></div></section>
+          <section class="panel selected-day-panel"><div class="panel-heading"><div><p class="panel-kicker">JOUR SÉLECTIONNÉ</p><h2 id="selected-day-title"></h2></div><button class="button button-quiet" data-open-task>＋ <span>Ajouter ce jour</span></button></div><div class="selected-day-list" id="selected-day-list"></div></section>
+        </section>
+        <section class="view" id="view-notifications">
+          <div class="page-heading"><div><p class="eyebrow">RESTEZ AU COURANT</p><h1>Notifications</h1><p class="welcome-subtitle">Les rappels et les dernières nouvelles de votre planning.</p></div><button class="button button-secondary" id="enable-notifications">♧ <span>Activer les notifications</span></button></div>
+          <section class="panel notification-settings"><div class="setting-symbol">♧</div><div class="setting-copy"><strong>Rappels sur cet appareil</strong><p id="notification-permission-copy">Recevez un rappel avant le début et l'échéance de vos activités.</p></div><span class="permission-badge" id="permission-badge">Dans l'application</span></section>
+          <section class="panel notifications-panel"><div class="panel-heading"><div><p class="panel-kicker">CENTRE DE NOTIFICATIONS</p><h2>Vos alertes</h2></div><button class="text-button" id="mark-all-read">Tout marquer comme lu</button></div><div id="notification-list" class="notification-list"></div><div class="empty-state notification-empty" id="notification-empty" hidden><span class="empty-icon">✧</span><strong>Tout est calme pour le moment</strong><p>Les rappels apparaîtront ici au fil de votre journée.</p></div></section>
+        </section>
+        <footer class="app-footer"><span>Home School Manager</span><span>Fait pour apprendre à son rythme <i>✳</i></span></footer>
+      </div>
+    </main>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="false"></div>
+  <div class="modal-backdrop" id="task-modal" hidden><section class="task-dialog" role="dialog" aria-modal="true" aria-labelledby="task-modal-title"><div class="dialog-header"><div><p class="panel-kicker">NOUVELLE ACTIVITÉ</p><h2 id="task-modal-title">Préparer une activité</h2></div><button class="icon-button" id="close-task-modal" aria-label="Fermer">×</button></div>
+    <form id="task-form"><input type="hidden" id="task-id"><label class="form-field full-field"><span>Nom de l'activité <b>*</b></span><input id="task-title" name="title" type="text" maxlength="90" required placeholder="Ex. Exercices sur les fractions"></label>
+      <div class="form-row"><label class="form-field"><span>Matière <b>*</b></span><select id="task-subject" name="subject" required></select></label><label class="form-field"><span>Priorité</span><select id="task-priority" name="priority"><option value="medium">Moyenne</option><option value="high">Élevée</option><option value="low">Faible</option></select></label></div>
+      <label class="form-field full-field"><span>Description ou consignes</span><textarea id="task-description" name="description" rows="3" maxlength="500" placeholder="Quelques indications pour bien démarrer..."></textarea></label>
+      <div class="form-row"><label class="form-field"><span>Date prévue <b>*</b></span><input id="task-date" name="date" type="date" required></label><label class="form-field"><span>Durée estimée</span><div class="input-suffix"><input id="task-duration" name="duration" type="number" min="5" max="600" step="5" value="30"><span>min</span></div></label></div>
+      <div class="form-row"><label class="form-field"><span>Heure de début <b>*</b></span><input id="task-start" name="start" type="time" required></label><label class="form-field"><span>Heure limite <b>*</b></span><input id="task-deadline" name="deadline" type="time" required></label></div>
+      <div class="form-row"><label class="form-field"><span>Répétition</span><select id="task-recurrence" name="recurrence"><option value="none">Aucune</option><option value="daily">Chaque jour</option><option value="weekly">Chaque semaine</option></select></label><label class="form-field"><span>Statut</span><select id="task-status" name="status"><option value="todo">À faire</option><option value="doing">En cours</option><option value="done">Réalisée</option></select></label></div>
+      <div class="dialog-actions"><button class="button button-quiet" type="button" id="cancel-task">Annuler</button><button class="button button-primary" type="submit" id="save-task">Enregistrer l'activité</button></div>
+    </form></section></div>
+  <div class="mobile-scrim" id="mobile-scrim"></div>
+</body>
+</html>

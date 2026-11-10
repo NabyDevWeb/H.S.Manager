@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 330" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">Home School</title>
+  <path d="M65 7h625v250c0 39-27 67-67 67H7V69C7 31 30 7 65 7Z" fill="none" stroke="#1712cc" stroke-width="5"/>
+  <path d="M67 20h611v235c0 35-24 59-59 59H20V77c0-35 15-57 47-57Z" fill="#fff" stroke="#1712cc" stroke-width="4"/>
+  <g fill="none" stroke="#1712cc" stroke-linecap="round" stroke-linejoin="round" stroke-width="7">
+    <path d="m25 139 62-48 61 48v71H25v-71Z"/>
+    <path d="m17 140 70-55 70 55M51 210v-45c0-5 4-9 9-9h23c5 0 9 4 9 9v45"/>
+    <path d="m125 65 53-18 54 18-54 19-53-19Z"/>
+    <path d="m145 71 33 12 33-12M178 83v21m0 0c-7 0-11 5-11 11v4"/>
+    <circle cx="179" cy="148" r="39"/>
+    <path d="M179 123v25l13 13"/>
+    <path d="M126 202h81c13 0 23 10 23 22s-10 22-23 22h-77v15h82c20 0 36-16 36-36s-16-37-36-37h-86v14Z"/>
+    <path d="M140 218h65m-65 17h57m-66 26v14h52m-32-14v36l14-10 14 10v-36"/>
+  </g>
+  <text x="221" y="180" fill="#1712cc" font-family="Arial,Helvetica,sans-serif" font-size="126" font-weight="900" letter-spacing="-5">HOME</text>
+  <path d="M239 216h72m209 0h73" stroke="#1712cc" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <text x="322" y="233" fill="#1712cc" font-family="Arial,Helvetica,sans-serif" font-size="43" font-style="italic" font-weight="700">School</text>
+</svg>
